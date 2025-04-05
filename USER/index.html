@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page - MOBICOMM</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100vh;
+        background-color: #1a1a2e;
+        font-family: 'Poppins', sans-serif;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.3;
+    }
+    .card {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        max-width: 350px;
+        width: 100%;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-right: 80px;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    }
+    .logo {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        font-size: 28px;
+        font-weight: 700;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .login {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(181, 150, 229, 0.2);
+        transition: background 0.3s ease;
+    }
+    .login:hover {
+        background: rgba(181, 150, 229, 0.4);
+    }
+    .card-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #C8A2E9;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    .input-container {
+        position: relative;
+        width: 100%;
+    }
+    .input-box {
+        width: 100%;
+        padding: 12px 35px 12px 12px;
+        border-radius: 8px;
+        border: 2px solid #B596E5;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+    }
+    .input-box:focus {
+        outline: none;
+        border-color: #9370DB;
+    }
+    .spinner {
+        display: none;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 18px;
+        height: 18px;
+        border: 3px solid #B596E5;
+        border-top: 3px solid #9370DB;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: translateY(-50%) rotate(0deg); }
+        100% { transform: translateY(-50%) rotate(360deg); }
+    }
+    #phoneerror {
+        font-size: 13px;
+        color: #ff4d4d;
+        display: none;
+        margin-bottom: 10px;
+    }
+    .popup {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+        padding: 25px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        border-radius: 15px;
+        font-size: 16px;
+        color: #333;
+        animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translate(-50%, -60%); }
+        to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+    }
+    .small-input {
+        width: 90%;
+        margin: 10px auto 15px auto;
+        display: block;
+    }
+    .close-icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        font-size: 22px;
+        color: #666;
+        transition: color 0.3s ease;
+    }
+    .close-icon:hover {
+        color: #333;
+    }
+    .otp-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px auto;
+        width: 90%;
+    }
+    .otp-digit {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        font-size: 18px;
+        border: 2px solid #B596E5;
+        border-radius: 8px;
+        margin: 0 5px;
+        transition: border-color 0.3s ease;
+    }
+    .otp-digit:focus {
+        outline: none;
+        border-color: #9370DB;
+    }
+    .timer {
+        font-size: 14px;
+        color: #B596E5;
+        margin-bottom: 10px;
+    }
+    .resend-otp {
+        font-size: 14px;
+        color: #B596E5;
+        cursor: pointer;
+        text-decoration: underline;
+        display: none;
+        margin-bottom: 10px;
+    }
+    button {
+        background: linear-gradient(90deg, #B596E5, #9370DB);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 15px;
+        width: 90%;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+        background: linear-gradient(90deg, #9370DB, #B596E5);
+        transform: translateY(-2px);
+    }
+    h5 {
+        color: #B596E5;
+        margin-bottom: 15px;
+        margin-top: 10px;
+        font-weight: 600;
+    }
+    #popup-phoneerror, #otp-error {
+        font-size: 13px;
+        color: #ff4d4d;
+        display: none;
+        margin: 8px 0;
+    }
+    @media (max-width: 768px) {
+        .card {
+            padding: 20px;
+            max-width: 300px;
+            margin-right: 10px;
+        }
+        .logo, .login {
+            font-size: 20px;
+        }
+        .card-title {
+            font-size: 18px;
+        }
+    }
+    @media (max-width: 576px) {
+        .card {
+            padding: 15px;
+            max-width: 280px;
+            margin-right: 5px;
+        }
+        .logo, .login {
+            font-size: 18px;
+        }
+        .card-title {
+            font-size: 16px;
+        }
+        .popup {
+            max-width: 340px;
+        }
+        .otp-digit {
+            width: 35px;
+            height: 35px;
+        }
+    }
+    
+</style>
+</head>
+<body>
+    <img src="2900293.jpg" alt="Image">
+    <div class="logo">MOBICOMM</div>
+    <div class="login" onclick="showLoginPopup()">Login</div>
+    
+    <div class="card" id="main-card">
+        <div class="card-title">Prepaid Mobile Recharge</div>
+        <div class="input-container">
+            <input type="text" placeholder="Mobile Number" id="mobileno" class="input-box" title="Enter a valid 10-digit phone number" required>
+            <div class="spinner" id="spinner"></div>
+        </div>
+        <span id="phoneerror">Please enter a valid phone number.</span>
+    </div>
+
+    <div class="popup-overlay" id="popup-overlay"></div>
+    
+    <div class="popup" id="login-popup">
+        <span class="close-icon" onclick="hidePopups()">×</span>
+        <h5>Enter Mobile Number</h5>
+        <input type="text" id="popup-mobileno" class="input-box small-input" placeholder="Mobile Number" maxlength="10" required>
+        <span id="popup-phoneerror">Please enter a valid phone number.</span>
+        <button onclick="generateOTP()">Generate OTP</button>
+    </div>
+    
+    <div class="popup" id="otp-popup">
+        <span class="close-icon" onclick="hidePopups()">×</span>
+        <h5>Enter OTP</h5>
+        <div class="otp-container">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-1" onkeyup="moveToNext(this, 'digit-2')">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-2" onkeyup="moveToNext(this, 'digit-3')">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-3" onkeyup="moveToNext(this, 'digit-4')">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-4" onkeyup="moveToNext(this, 'digit-5')">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-5" onkeyup="moveToNext(this, 'digit-6')">
+            <input type="text" maxlength="1" class="otp-digit" id="digit-6">
+        </div>
+        <div class="timer" id="timer">25 seconds</div>
+        <div class="resend-otp" id="resend-otp" onclick="resendOTP()">Resend OTP</div>
+        <span id="otp-error">Invalid OTP. Please try again.</span>
+        <button onclick="validateOTP()">Validate OTP</button>
+    </div>
+
+    <script>
+        const BASE_URL = 'http://localhost:8083/user';
+        let timerInterval;
+        let currentMobileNumber = '';
+    
+        // Check if redirected from person icon click
+        const urlParams = new URLSearchParams(window.location.search);
+        const fromNavbar = urlParams.get('fromNavbar') === 'true';
+        
+        if (fromNavbar) {
+            document.addEventListener("DOMContentLoaded", function() {
+                showLoginPopup();
+            });
+        }
+    
+        document.getElementById("mobileno").addEventListener("input", function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length === 10) {
+                validatePhoneNumber();
+            }
+        });
+    
+        document.getElementById("popup-mobileno").addEventListener("input", function(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    
+        document.getElementById("mobileno").addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && this.value.length === 10) {
+                validatePhoneNumber();
+            }
+        });
+    
+        const otpDigits = document.querySelectorAll('.otp-digit');
+        otpDigits.forEach(digit => {
+            digit.addEventListener("input", function(e) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        });
+    
+        async function validatePhoneNumber() {
+            const phoneInput = document.getElementById("mobileno").value;
+            const phoneError = document.getElementById("phoneerror");
+            const spinner = document.getElementById("spinner");
+            const phonePattern = /^\d{10}$/;
+    
+            if (!phonePattern.test(phoneInput)) {
+                phoneError.style.display = "block";
+                spinner.style.display = "none";
+                return;
+            }
+    
+            phoneError.style.display = "none";
+            spinner.style.display = "block";
+    
+            try {
+                const response = await fetch(`${BASE_URL}/login-with-mobile?mobileNo=${phoneInput}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+    
+                if (response.ok) {
+                    localStorage.setItem("mobileNumber", phoneInput);
+                    localStorage.removeItem("username");
+                    setTimeout(() => {
+                        window.location.href = `plans.html?mobile=${phoneInput}`;
+                    }, 2000);
+                } else {
+                    const errorText = await response.text();
+                    phoneError.textContent = errorText || "Login failed. Please try again.";
+                    phoneError.style.display = "block";
+                    spinner.style.display = "none";
+                }
+            } catch (error) {
+                phoneError.textContent = "An error occurred. Please try again.";
+                phoneError.style.display = "block";
+                spinner.style.display = "none";
+            }
+        }
+    
+        function showLoginPopup() {
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('login-popup').style.display = 'block';
+            document.getElementById('main-card').style.display = 'none';
+        }
+    
+        function hidePopups() {
+            document.getElementById('popup-overlay').style.display = 'none';
+            document.getElementById('login-popup').style.display = 'none';
+            document.getElementById('otp-popup').style.display = 'none';
+            document.getElementById('main-card').style.display = 'block';
+            resetInputs();
+            clearInterval(timerInterval);
+            
+            // If redirected from navbar, go back to previous page
+            if (fromNavbar) {
+                window.history.back();
+            }
+        }
+    
+        function resetInputs() {
+            document.getElementById('mobileno').value = '';
+            document.getElementById('popup-mobileno').value = '';
+            document.getElementById('popup-phoneerror').style.display = 'none';
+            document.getElementById('otp-error').style.display = 'none';
+            otpDigits.forEach(digit => digit.value = '');
+            document.getElementById('resend-otp').style.display = 'none';
+        }
+    
+        async function generateOTP() {
+            const phoneInput = document.getElementById('popup-mobileno');
+            const phoneError = document.getElementById('popup-phoneerror');
+            const phonePattern = /^\d{10}$/;
+    
+            if (!phonePattern.test(phoneInput.value)) {
+                if (isNaN(phoneInput.value)) {
+                    phoneError.textContent = 'Please enter only numbers.';
+                } else {
+                    phoneError.textContent = 'Please enter a valid 10-digit phone number.';
+                }
+                phoneError.style.display = 'block';
+                return;
+            }
+    
+            phoneError.style.display = 'none';
+            currentMobileNumber = phoneInput.value;
+    
+            try {
+                const response = await fetch(`${BASE_URL}/generate-otp?mobileNo=${phoneInput.value}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+    
+                if (response.ok) {
+                    localStorage.setItem("mobileNumber", phoneInput.value);
+                    document.getElementById('login-popup').style.display = 'none';
+                    document.getElementById('otp-popup').style.display = 'block';
+                    startTimer();
+                } else {
+                    const errorText = await response.text();
+                    phoneError.textContent = errorText || "Failed to generate OTP.";
+                    phoneError.style.display = "block";
+                }
+            } catch (error) {
+                phoneError.textContent = "An error occurred while generating OTP. Please try again.";
+                phoneError.style.display = "block";
+            }
+        }
+    
+        function startTimer() {
+            clearInterval(timerInterval);
+            let timeLeft = 25;
+            document.getElementById('timer').textContent = `${timeLeft} seconds`;
+            document.getElementById('resend-otp').style.display = 'none';
+    
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = `${timeLeft} seconds`;
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById('resend-otp').style.display = 'block';
+                }
+            }, 1000);
+        }
+    
+        async function resendOTP() {
+            try {
+                const response = await fetch(`${BASE_URL}/generate-otp?mobileNo=${currentMobileNumber}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+    
+                if (response.ok) {
+                    otpDigits.forEach(digit => digit.value = '');
+                    document.getElementById('otp-error').style.display = 'none';
+                    startTimer();
+                } else {
+                    const errorText = await response.text();
+                    document.getElementById('otp-error').textContent = errorText || "Failed to resend OTP.";
+                    document.getElementById('otp-error').style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('otp-error').textContent = "An error occurred while resending OTP.";
+                document.getElementById('otp-error').style.display = 'block';
+            }
+        }
+    
+        async function validateOTP() {
+            let enteredOTP = '';
+            otpDigits.forEach(digit => enteredOTP += digit.value);
+            const otpError = document.getElementById('otp-error');
+    
+            // Basic validation
+            if (enteredOTP.length !== 6) {
+                otpError.textContent = "Please enter a 6-digit OTP.";
+                otpError.style.display = "block";
+                return;
+            }
+    
+            try {
+                const response = await fetch(`${BASE_URL}/verify-otp?mobileNo=${currentMobileNumber}&otp=${enteredOTP}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+    
+                if (response.ok) {
+                    localStorage.setItem("mobileNumber", currentMobileNumber);
+                    
+                    // Fetch user details to get username
+                    try {
+                        const detailsResponse = await fetch(`${BASE_URL}/details?mobileNo=${currentMobileNumber}`, {
+                            method: 'GET',
+                            headers: { 'Content-Type': 'application/json' },
+                        });
+    
+                        if (detailsResponse.ok) {
+                            const user = await detailsResponse.json();
+                            localStorage.setItem('username', user.username || 'User');
+                        }
+                    } catch (error) {
+                        console.error("Error fetching user details:", error);
+                    }
+    
+                    // Redirect back to previous page if came from navbar
+                    if (fromNavbar) {
+                        window.history.back();
+                    } else {
+                        window.location.href = "profile_page.html";
+                    }
+                } else {
+                    const errorText = await response.text();
+                    otpError.textContent = errorText || "Invalid OTP. Please try again.";
+                    otpError.style.display = "block";
+                    otpDigits.forEach(digit => digit.value = '');
+                    document.getElementById('digit-1').focus();
+                }
+            } catch (error) {
+                otpError.textContent = "An error occurred. Please try again.";
+                otpError.style.display = "block";
+            }
+        }
+    
+        function moveToNext(currentField, nextFieldId) {
+            if (currentField.value.length >= currentField.maxLength) {
+                document.getElementById(nextFieldId).focus();
+            }
+        }
+    
+        otpDigits.forEach(digit => {
+            digit.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                if (/^\d+$/.test(pasteData)) {
+                    for (let i = 0; i < Math.min(pasteData.length, otpDigits.length); i++) {
+                        otpDigits[i].value = pasteData[i];
+                    }
+                    if (pasteData.length < otpDigits.length) {
+                        otpDigits[pasteData.length].focus();
+                    }
+                }
+            });
+        });
+    
+        document.getElementById('popup-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hidePopups();
+            }
+        });
+    </script>
+</body>
+</html>

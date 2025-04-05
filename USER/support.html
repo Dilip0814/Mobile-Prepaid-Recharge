@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - MOBICOMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            padding-top: 120px;
+            flex: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            padding: 30px;
+        }
+
+        .support-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .support-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .support-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .support-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            height: 100%;
+        }
+
+        .support-card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #592e83;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .support-card h2 i {
+            margin-right: 12px;
+            font-size: 28px;
+        }
+
+        .contact-form .form-control {
+            padding: 12px;
+            border: 2px solid #B596E5;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form .form-control:focus {
+            border-color: #9370DB;
+            box-shadow: none;
+        }
+
+        .contact-form textarea.form-control {
+            min-height: 150px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(90deg, #9370DB, #B596E5);
+            transform: translateY(-2px);
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: #592e83;
+        }
+
+        .faq-answer {
+            font-size: 16px;
+            color: #666;
+            padding-left: 10px;
+        }
+
+        .help-section {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .help-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .help-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .help-content h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .help-content p {
+            font-size: 16px;
+            color: #666;
+            margin: 0;
+        }
+
+        .feature-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .card-spacing {
+            margin-bottom: 30px;
+        }
+
+        /* Custom Alert Styles */
+        .custom-alert {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1100;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .custom-alert.error {
+            background-color: #f44336;
+        }
+
+        @keyframes slideIn {
+            from { bottom: -50px; opacity: 0; }
+            to { bottom: 20px; opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { bottom: 20px; opacity: 1; }
+            to { bottom: -50px; opacity: 0; }
+        }
+
+        .progress-bar {
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: white;
+            width: 0%;
+            transition: width 0.3s linear;
+        }
+
+        .mobile-error {
+            color: #f44336;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .btn-submit-loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .btn-submit-loading::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #1e293b;
+            color: #fff;
+            padding: 3rem 0 1rem;
+            margin-top: auto;
+        }
+
+        .footer h5, .footer h6 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            margin-right: 15px;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+
+        .store-badge {
+            height: 40px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: opacity 0.3s ease;
+        }
+
+        .store-badge:hover {
+            opacity: 0.8;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+
+        .footer-bottom p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .support-header h1 {
+                font-size: 28px;
+            }
+
+            .support-header p {
+                font-size: 16px;
+            }
+
+            .support-card h2 {
+                font-size: 22px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+            }
+
+            .faq-answer {
+                font-size: 15px;
+            }
+
+            .footer {
+                text-align: center;
+            }
+            
+            .footer .col-lg-3 {
+                margin-bottom: 30px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .store-badge {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .support-header h1 {
+                font-size: 24px;
+            }
+
+            .support-card {
+                padding: 20px;
+            }
+
+            .help-item {
+                flex-direction: column;
+            }
+
+            .help-icon {
+                margin-bottom: 10px;
+            }
+
+            .footer {
+                padding: 2rem 0 1rem;
+            }
+            
+            .footer h5, .footer h6 {
+                font-size: 18px;
+            }
+            
+            .footer-link {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="Home.html">MOBICOMM</a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About_Us.html">About Us</a>
+                    </li>
+                </ul>
+                <a class="nav-link person-icon d-none d-lg-block" href="profile_page.html">
+                    <span id="usernameDisplay"><i class="bi bi-person-circle"></i></span>
+                </a>
+            </div>
+            <a class="nav-link person-icon d-lg-none" href="profile_page.html">
+                <span id="usernameDisplayMobile"><i class="bi bi-person-circle"></i></span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="support-header">
+                <h1>How can we help you?</h1>
+                <p>Get instant support for your mobile recharge queries, payment issues, or any other questions about our services.</p>
+            </div>
+
+            <div class="row card-spacing">
+                <div class="col-lg-6">
+                    <div class="support-card">
+                        <h2><i class="bi bi-headset"></i> Contact Support</h2>
+                        <p>Have a question or need assistance? Send us a message and our support team will get back to you within 24 hours.</p>
+                        
+                        <form class="contact-form" id="supportForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="nameInput" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" id="mobileInput" placeholder="Mobile Number" required>
+                                    <div id="mobileError" class="mobile-error">User not found. Please enter a registered mobile number.</div>
+                                </div>
+                            </div>
+                            <input type="email" class="form-control" id="emailInput" placeholder="Email Address">
+                            <textarea class="form-control" id="messageInput" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn-submit" id="submitBtn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="support-card">
+                        <h2><i class="bi bi-telephone"></i> Quick Help</h2>
+                        <div class="help-section">
+                            <div class="help-item">
+                                <div class="help-icon">
+                                    <i class="bi bi-telephone-outbound"></i>
+                                </div>
+                                <div class="help-content">
+                                    <h4>Call Us</h4>
+                                    <p>+91 98765 43210 (24x7 Support)</p>
+                                </div>
+                            </div>
+                            <div class="help-item">
+                                <div class="help-icon">
+                                    <i class="bi bi-whatsapp"></i>
+                                </div>
+                                <div class="help-content">
+                                    <h4>WhatsApp</h4>
+                                    <p>+91 98765 43210 (Instant Chat)</p>
+                                </div>
+                            </div>
+                            <div class="help-item">
+                                <div class="help-icon">
+                                    <i class="bi bi-envelope"></i>
+                                </div>
+                                <div class="help-content">
+                                    <h4>Email Us</h4>
+                                    <p>support@mobiComm.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-image">
+                            <img src="https://via.placeholder.com/600x300?text=Customer+Support+Team" alt="Customer Support Team">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row card-spacing">
+                <div class="col-lg-8">
+                    <div class="support-card">
+                        <h2><i class="bi bi-question-circle"></i> Frequently Asked Questions</h2>
+                        
+                        <div class="faq-item">
+                            <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I recharge my mobile number?
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer collapse show" id="faq1">
+                                You can recharge your mobile number by entering your 10-digit mobile number on our homepage, selecting a plan that suits your needs, and completing the payment process through our secure payment gateway.
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                How long does it take for a recharge to be activated?
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer collapse" id="faq2">
+                                Most recharges are activated instantly after successful payment. In rare cases, it may take up to 15 minutes. If your recharge hasn't been activated within this time, please contact our support team.
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                What payment methods do you accept?
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer collapse" id="faq3">
+                                We accept all major credit/debit cards, UPI payments (Google Pay, PhonePe, Paytm), net banking, and mobile wallets for your convenience.
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Can I get a refund if I recharge the wrong number?
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer collapse" id="faq4">
+                                Unfortunately, we cannot process refunds for recharges made to incorrect numbers. Please double-check the mobile number before confirming your payment.
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                How can I check my recharge history?
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer collapse" id="faq5">
+                                You can view your recharge history by logging into your MobiComm account and navigating to the "My Transactions" section. All your past recharges will be listed there with details.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="support-card">
+                        <h2><i class="bi bi-info-circle"></i> About MobiComm</h2>
+                        <div class="feature-image">
+                            <img src="https://via.placeholder.com/400x200?text=MobiComm+Service" alt="MobiComm Service">
+                        </div>
+                        <p>MobiComm is India's fastest growing mobile recharge platform, providing instant prepaid recharges for all major telecom operators.</p>
+                        <p>Our mission is to make mobile recharges quick, easy, and secure with the best plans and offers in the market.</p>
+                        <p>With over 5 million happy customers, we pride ourselves on our 99.9% recharge success rate and 24/7 customer support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <h5 class="mb-3">MobiComm</h5>
+                    <p class="text-muted">Your trusted partner for instant mobile recharges</p>
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6 class="mb-3">Quick Links</h6>
+                    <a href="plans.html" class="footer-link">Prepaid Plans</a>
+                    <a href="support.html" class="footer-link">Support</a>
+                    <a href="#" class="footer-link">Offers</a>
+                    <a href="profile_page.html" class="footer-link">Recharge History</a>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <a href="support.html" class="footer-link">Help Center</a>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="support.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <h6 class="mb-3">Download Our App</h6>
+                    <div>
+                        <img src="https://via.placeholder.com/135x40?text=App+Store" alt="App Store" class="store-badge">
+                        <img src="https://via.placeholder.com/135x40?text=Play+Store" alt="Play Store" class="store-badge">
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 MobiComm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Alert for Success/Failure Messages -->
+    <div id="customAlert" class="custom-alert">
+        <div class="alert-content">
+            <span id="alertMessage"></span>
+            <div class="progress-bar">
+                <div class="progress-bar-fill"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // FAQ toggle functionality remains the same
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('bi-chevron-down')) {
+                    icon.classList.remove('bi-chevron-down');
+                    icon.classList.add('bi-chevron-up');
+                } else {
+                    icon.classList.remove('bi-chevron-up');
+                    icon.classList.add('bi-chevron-down');
+                }
+            });
+        });
+    
+        // Support form submission - corrected version
+        document.getElementById('supportForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const mobileInput = document.getElementById('mobileInput');
+            const messageInput = document.getElementById('messageInput');
+            const mobileError = document.getElementById('mobileError');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Validate mobile number format
+            if (!/^[0-9]{10}$/.test(mobileInput.value)) {
+                mobileError.textContent = "Please enter a valid 10-digit mobile number";
+                mobileError.style.display = "block";
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.classList.add('btn-submit-loading');
+            submitBtn.disabled = true;
+            
+            try {
+                // Check if user exists - using proper URL parameters
+                const checkUserResponse = await fetch(`http://localhost:8083/user/login-with-mobile?mobileNo=${encodeURIComponent(mobileInput.value)}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    }
+                });
+                
+                if (!checkUserResponse.ok) {
+                    throw new Error('User not found');
+                }
+                
+                // User exists, proceed with sending message - using proper URL parameters
+                const params = new URLSearchParams();
+                params.append('mobileNo', mobileInput.value);
+                params.append('message', messageInput.value);
+                
+                const response = await fetch('http://localhost:8083/user/send-support', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: params
+                });
+                
+                if (response.ok) {
+                    showAlert("Your message has been sent successfully!");
+                    this.reset();
+                } else {
+                    const errorText = await response.text();
+                    throw new Error(errorText || "Failed to send message");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mobileError.textContent = error.message.includes('User') ? error.message : "An error occurred. Please try again.";
+                mobileError.style.display = "block";
+                showAlert("Failed to send message. Please try again.", true);
+            } finally {
+                submitBtn.classList.remove('btn-submit-loading');
+                submitBtn.disabled = false;
+            }
+        });
+    
+        // Mobile input validation remains the same
+        document.getElementById('mobileInput').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+            document.getElementById('mobileError').style.display = 'none';
+        });
+    
+        // Function to show custom alert remains the same
+        function showAlert(message, isError = false) {
+            const alert = document.getElementById('customAlert');
+            const alertMessage = document.getElementById('alertMessage');
+            const progressBar = document.querySelector('.progress-bar-fill');
+            
+            alertMessage.textContent = message;
+            alert.className = isError ? 'custom-alert error' : 'custom-alert';
+            alert.style.display = 'block';
+            
+            progressBar.style.width = '0%';
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+            }, 10);
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

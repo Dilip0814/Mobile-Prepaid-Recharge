@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('login image.png') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(106, 17, 203, 0.8), rgba(149, 14, 198, 0.8));
+}
+
+.login-container, .forgot-password-container, .reset-password-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 1;
+}
+
+.login-container h2, .forgot-password-container h2, .reset-password-container h2 {
+    color: #6a11cb;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 0.5rem; 
+}
+
+.btn-login, .btn-reset, .btn-confirm {
+    background: linear-gradient(135deg, #6a11cb, rgba(149, 14, 198, 0.8));
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    width: 100%;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-login:hover, .btn-reset:hover, .btn-confirm:hover {
+    background: linear-gradient(135deg, #790fba, #6a11cb);
+}
+
+.forgot-password, .back-to-login {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.forgot-password a, .back-to-login a {
+    color: #6a11cb;
+    text-decoration: none;
+}
+
+.forgot-password a:hover, .back-to-login a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+.alert-success {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: none;
+    width: 300px; 
+    padding: 1rem;
+}
+
+.forgot-password-container, .reset-password-container {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .alert-success {
+        top: 10px;
+        right: 10px;
+        width: 90%;
+        max-width: 300px;
+    }
+}

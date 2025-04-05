@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - MOBICOMM</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="navbar.css">
+    <script src="navbar.js"></script>
+   
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            padding-top: 120px;
+            flex: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            padding: 30px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .profile-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .alphabet-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            text-transform: uppercase;
+        }
+
+        .profile-info h4 {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .profile-details {
+            display: grid;
+            gap: 15px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-item p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .detail-item p:first-child {
+            color: #666;
+        }
+
+        .detail-item p:last-child {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .edit-profile-btn {
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .edit-profile-btn:hover {
+            background: linear-gradient(90deg, #9370DB, #B596E5);
+            transform: translateY(-2px);
+        }
+
+        /* Add to existing styles */
+.custom-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1100;
+    display: none;
+    animation: slideIn 0.3s ease-out;
+    max-width: 90%;
+    text-align: center;
+}
+
+.custom-alert.error {
+    background-color: #f44336;
+}
+
+@keyframes slideIn {
+    from { bottom: -50px; opacity: 0; }
+    to { bottom: 20px; opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { bottom: 20px; opacity: 1; }
+    to { bottom: -50px; opacity: 0; }
+}
+
+.progress-bar {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: white;
+    width: 0%;
+    transition: width 0.3s linear;
+}
+
+.save-btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.save-btn-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+        .current-plan {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .plan-title {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .plan-price {
+            color: #592e83;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .expiry-badge {
+            background: #ffeeba;
+            color: #856404;
+            padding: 8px 12px;
+            border-radius: 24px;
+            font-size: 14px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .feature-item i {
+            font-size: 24px;
+            color: #B596E5;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            margin: 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        .quick-recharge-btn {
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .quick-recharge-btn:hover {
+            background: linear-gradient(90deg, #9370DB, #B596E5);
+            transform: translateY(-2px);
+        }
+
+        .transactions-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .transactions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .transactions-header h6 {
+            margin: 0;
+            font-weight: 600;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .table th {
+            font-weight: 600;
+            color: #666;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .table td {
+            padding: 20px;
+            vertical-align: middle;
+            font-size: 16px;
+        }
+
+        .status-success {
+            color: #28a745;
+        }
+
+        .download-icon {
+            color: #B596E5;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .logout-btn {
+            background: linear-gradient(90deg, #B596E5, #9370DB);
+            color: #fff;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin: 30px auto;
+            display: block;
+            width: fit-content;
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(90deg, #9370DB, #B596E5);
+            transform: translateY(-2px);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .form-control {
+            border: 2px solid #B596E5;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: #9370DB;
+            box-shadow: none;
+        }
+
+        .form-control[readonly] {
+            background-color: #e9ecef;
+            color: #adb5bd;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="Home.html">MobiComm</a>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav d-flex">
+                    <li class="nav-item">
+                        <a class="nav-link" href="plans.html">Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="support.html">Support</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About_Us.html">About Us</a>
+                    </li>
+                </ul>
+                <a class="nav-link person-icon d-none d-lg-block" href="profile_page.html">
+                    <span id="usernameDisplay"><i class="bi bi-person-circle"></i></span>
+                </a>
+            </div>
+            <a class="nav-link person-icon d-lg-none" href="profile_page.html">
+                <span id="usernameDisplayMobile"><i class="bi bi-person-circle"></i></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="alphabet-logo" id="alphabetLogo"></div>
+                        <div class="profile-info">
+                            <h4 id="userName">Loading...</h4>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <p>Email ID</p>
+                            <p id="userEmail">Loading...</p>
+                        </div>
+                        <div class="detail-item">
+                            <p>Mobile No</p>
+                            <p id="primaryNumber">Loading...</p>
+                        </div>
+                        <div class="detail-item">
+                            <p>Location</p>
+                            <p id="userLocation">Loading...</p>
+                        </div>
+                    </div>
+                    <button class="edit-profile-btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        Edit Profile
+                    </button>
+                </div>
+
+               
+                <div id="customAlert" class="custom-alert">
+                    <div class="alert-content">
+                        <span id="alertMessage"></span>
+                    </div>
+                </div>
+
+                <div class="current-plan">
+                    <div class="plan-header">
+                        <div>
+                            <p class="plan-title">Current Plan</p>
+                            <p class="plan-price" id="planPrice">Loading...</p>
+                        </div>
+                        <span class="expiry-badge" id="expiryBadge">Loading...</span>
+                    </div>
+                    <div class="features-grid" id="featuresGrid">
+                        <p>Loading plan details...</p>
+                    </div>
+                    <button class="quick-recharge-btn" id="quickRechargeBtn" disabled>Quick Recharge Same Plan</button>
+                </div>
+            </div>
+
+            <div class="transactions-section">
+                <div class="transactions-header">
+                    <h6>Recent Transactions</h6>
+                    <div>
+                        <button class="btn btn-sm btn-link"><i class="bi bi-funnel"></i> Filter</button>
+                        <button class="btn btn-sm btn-link"><i class="bi bi-download"></i> Export</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>Plan Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Expiry Date</th>
+                                <th>Receipt</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center">Loading transactions...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" id="nameInput" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Email ID</label>
+                            <input type="email" class="form-control" id="emailInput">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile No</label>
+                            <input type="tel" class="form-control" id="primaryNumberInput" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-control" id="locationInput">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const BASE_URL = 'http://localhost:8083/user';
+        let transactions = []; // Store transactions globally
+        let currentActivePlan = null; // Store the current active plan
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileNumber = localStorage.getItem("mobileNumber");
+            if (!mobileNumber) {
+                alert("No mobile number found. Please log in again.");
+                window.location.href = "index.html";
+                return;
+            }
+            
+            // First load user details
+            fetchUserDetails(mobileNumber).then(() => {
+                // Then load transactions
+                fetchTransactionDetails(mobileNumber);
+            });
+    
+            // Edit profile form submission
+            document.getElementById("editProfileForm").addEventListener("submit", async function(e) {
+                e.preventDefault();
+                
+                const saveBtn = document.querySelector("#editProfileForm button[type='submit']");
+                saveBtn.classList.add('save-btn-loading');
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = 'Saving...';
+                
+                const mobileNo = localStorage.getItem("mobileNumber");
+                const email = document.getElementById("emailInput").value;
+                const location = document.getElementById("locationInput").value;
+    
+                try {
+                    const response = await fetch(`${BASE_URL}/update`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `mobileNo=${encodeURIComponent(mobileNo)}&email=${encodeURIComponent(email)}&location=${encodeURIComponent(location)}`
+                    });
+    
+                    if (response.ok) {
+                        // Close the modal
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+                        modal.hide();
+                        
+                        // Refresh user details
+                        fetchUserDetails(mobileNo);
+                        
+                        // Show success message
+                        showAlert("Profile updated successfully!");
+                    } else {
+                        const errorText = await response.text();
+                        showAlert(`Failed to update profile: ${errorText}`, true);
+                    }
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    showAlert("An error occurred while updating profile. Please try again.", true);
+                } finally {
+                    saveBtn.classList.remove('save-btn-loading');
+                    saveBtn.disabled = false;
+                    saveBtn.innerHTML = 'Save Changes';
+                }
+            });
+    
+            // Reset form when modal is closed
+            document.getElementById('editProfileModal').addEventListener('hidden.bs.modal', function() {
+                const mobileNo = localStorage.getItem("mobileNumber");
+                if (mobileNo) {
+                    fetchUserDetails(mobileNo);
+                }
+            });
+    
+            // Handle quick recharge button click
+            document.getElementById('quickRechargeBtn').addEventListener('click', handleQuickRecharge);
+        });
+    
+        async function handleQuickRecharge() {
+            if (!currentActivePlan) {
+                showAlert("No active plan found for quick recharge", true);
+                return;
+            }
+    
+            try {
+                // Prepare the plan details for payment
+                const planDetails = {
+                    info: `${currentActivePlan.service} | ${currentActivePlan.dataLimit} | ${currentActivePlan.validity} Days`,
+                    price: `₹${currentActivePlan.price.toFixed(2)}`
+                };
+    
+                // Store the plan details for the transaction page
+                localStorage.setItem('planDetails', JSON.stringify(planDetails));
+                localStorage.setItem('mobileNumber', currentActivePlan.mobileNo || localStorage.getItem("mobileNumber"));
+                
+                // Redirect to transaction page
+                window.location.href = "transaction.html";
+            } catch (error) {
+                console.error('Error during quick recharge:', error);
+                showAlert("An error occurred while processing your request. Please try again.", true);
+            }
+        }
+    
+        async function fetchUserDetails(mobileNo) {
+            try {
+                const response = await fetch(`${BASE_URL}/details?mobileNo=${mobileNo}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                if (response.ok) {
+                    const user = await response.json();
+                    displayUserDetails(user);
+                } else {
+                    throw new Error("Failed to fetch user details");
+                }
+            } catch (error) {
+                console.error('Error fetching user details:', error);
+                document.getElementById("userName").innerText = "Error loading";
+                document.getElementById("userEmail").innerText = "Error";
+                document.getElementById("primaryNumber").innerText = "Error";
+                document.getElementById("userLocation").innerText = "Error";
+            }
+        }
+    
+        function displayUserDetails(user) {
+            const username = user.username || "User";
+            const email = user.email || "Not set";
+            const mobileNumber = user.mobileNo || "Not available";
+            const location = user.location || "Not set";
+    
+            document.getElementById("userName").innerText = username;
+            document.getElementById("userEmail").innerText = email;
+            document.getElementById("primaryNumber").innerText = mobileNumber;
+            document.getElementById("userLocation").innerText = location;
+    
+            document.getElementById("nameInput").value = username;
+            document.getElementById("emailInput").value = email;
+            document.getElementById("primaryNumberInput").value = mobileNumber;
+            document.getElementById("locationInput").value = location;
+    
+            const firstLetter = username.charAt(0).toUpperCase();
+            document.getElementById("alphabetLogo").innerText = firstLetter;
+    
+            const usernameDisplay = document.getElementById("usernameDisplay");
+            const usernameDisplayMobile = document.getElementById("usernameDisplayMobile");
+            usernameDisplay.innerHTML = `<i class="bi bi-person-circle"></i> ${username}`;
+            usernameDisplayMobile.innerHTML = `<i class="bi bi-person-circle"></i> ${username}`;
+    
+            localStorage.setItem("username", username);
+        }
+    
+        async function fetchTransactionDetails(mobileNo) {
+            try {
+                const response = await fetch(`${BASE_URL}/transactions?mobileNo=${mobileNo}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+    
+                if (response.ok) {
+                    transactions = await response.json();
+                    displayRecentTransactions(transactions);
+                    
+                    // If there are transactions, try to display the current plan
+                    if (transactions.length > 0) {
+                        // Find the most recent successful transaction
+                        const activePlan = transactions.find(t => t.paymentStatus === 'SUCCESS') || transactions[0];
+                        displayCurrentPlan(activePlan);
+                    }
+                } else {
+                    document.getElementById("transactionTableBody").innerHTML = 
+                        `<tr><td colspan="6" class="text-center">No transactions found</td></tr>`;
+                }
+            } catch (error) {
+                console.error('Error fetching transactions:', error);
+                document.getElementById("transactionTableBody").innerHTML = 
+                    `<tr><td colspan="6" class="text-center">Error loading transactions</td></tr>`;
+            }
+        }
+    
+        function displayCurrentPlan(transaction) {
+            if (!transaction) return;
+            
+            // Store the current active plan details
+            if (transaction.paymentStatus === 'SUCCESS') {
+                currentActivePlan = {
+                    mobileNo: transaction.mobileNo,
+                    planId: transaction.planId,
+                    service: transaction.planDetails?.split(' | ')[0] || 'N/A',
+                    dataLimit: transaction.planDetails?.split(' | ')[1] || 'N/A',
+                    validity: parseInt(transaction.planDetails?.split(' | ')[2]) || 0,
+                    price: transaction.price || 0,
+                    expiryDate: transaction.expiryDate
+                };
+            }
+            
+            // Update plan price
+            document.getElementById("planPrice").textContent = `₹${transaction.price?.toFixed(2) || '0.00'}`;
+            
+            // Update expiry badge
+            if (transaction.expiryDate) {
+                const expiryDate = new Date(transaction.expiryDate);
+                const today = new Date();
+                const diffTime = expiryDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays > 0) {
+                    document.getElementById("expiryBadge").textContent = `Expires in ${diffDays} days`;
+                } else {
+                    document.getElementById("expiryBadge").textContent = `Expired`;
+                }
+            }
+            
+            // Update features grid
+            const featuresGrid = document.getElementById("featuresGrid");
+            featuresGrid.innerHTML = '';
+            
+            // Parse plan details (assuming format: "Service | Data | Validity")
+            let service = 'N/A';
+            let data = 'N/A';
+            let validity = 'N/A';
+            
+            if (transaction.planDetails) {
+                const parts = transaction.planDetails.split(' | ');
+                service = parts[0] || 'N/A';
+                data = parts[1] || 'N/A';
+                validity = parts[2] || 'N/A';
+            }
+            
+            const features = [
+                { icon: 'bi-tv', label: service },
+                { icon: 'bi-calendar', label: validity },
+                { icon: 'bi-wifi', label: data },
+                { icon: 'bi-lightning-charge', label: 'High Speed' }
+            ];
+            
+            features.forEach(feature => {
+                const featureItem = document.createElement('div');
+                featureItem.className = 'feature-item';
+                featureItem.innerHTML = `
+                    <i class="bi ${feature.icon}"></i>
+                    <p>${feature.label}</p>
+                `;
+                featuresGrid.appendChild(featureItem);
+            });
+            
+            // Enable quick recharge button if plan is active
+            if (transaction.paymentStatus === 'SUCCESS' && transaction.expiryDate) {
+                const expiryDate = new Date(transaction.expiryDate);
+                const today = new Date();
+                if (expiryDate > today) {
+                    const quickRechargeBtn = document.getElementById("quickRechargeBtn");
+                    quickRechargeBtn.disabled = false;
+                }
+            }
+        }
+    
+        function displayRecentTransactions(transactions) {
+            const transactionTableBody = document.getElementById("transactionTableBody");
+            transactionTableBody.innerHTML = "";
+    
+            if (!transactions || transactions.length === 0) {
+                transactionTableBody.innerHTML = 
+                    `<tr><td colspan="6" class="text-center">No transactions found</td></tr>`;
+                return;
+            }
+    
+            // Sort by transaction date (newest first)
+            transactions.sort((a, b) => new Date(b.transactionDate) - new Date(a.transactionDate));
+    
+            transactions.forEach(transaction => {
+                const row = document.createElement("tr");
+                
+                // Format date
+                const date = new Date(transaction.transactionDate);
+                const formattedDate = date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+    
+                // Format expiry date based on payment status
+                let expiryDateFormatted = '-';
+                if (transaction.paymentStatus === 'SUCCESS' && transaction.expiryDate) {
+                    const expiryDate = new Date(transaction.expiryDate);
+                    expiryDateFormatted = expiryDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+                }
+    
+                // Format plan details (service, data, validity)
+                let planDetails = 'N/A';
+                if (transaction.planDetails) {
+                    const parts = transaction.planDetails.split(' | ');
+                    if (parts.length >= 3) {
+                        planDetails = `${parts[0]} (${parts[1]} for ${parts[2]})`;
+                    } else {
+                        planDetails = transaction.planDetails;
+                    }
+                }
+    
+                // Determine status class and display text
+                let statusClass = '';
+                let statusText = '';
+                switch(transaction.paymentStatus) {
+                    case 'SUCCESS':
+                        statusClass = 'status-success';
+                        statusText = 'Success';
+                        break;
+                    case 'PENDING':
+                        statusClass = 'status-pending';
+                        statusText = 'Pending';
+                        break;
+                    case 'FAILED':
+                        statusClass = 'status-failed';
+                        statusText = 'Failed';
+                        break;
+                    default:
+                        statusClass = 'status-success';
+                        statusText = 'Success';
+                }
+    
+                row.innerHTML = `
+                    <td>${formattedDate}</td>
+                    <td>${planDetails}</td>
+                    <td>₹${transaction.price?.toFixed(2) || '0.00'}</td>
+                    <td><span class="${statusClass}">${statusText}</span></td>
+                    <td>${expiryDateFormatted}</td>
+                    <td><i class="bi bi-file-earmark-arrow-down download-icon" 
+                         onclick="downloadReceipt('${transaction.transactionId}')"></i></td>
+                `;
+                transactionTableBody.appendChild(row);
+            });
+        }
+    
+        function downloadReceipt(transactionId) {
+            const mobileNo = localStorage.getItem("mobileNumber");
+            if (!mobileNo) {
+                alert("Session expired. Please log in again.");
+                window.location.href = "index.html";
+                return;
+            }
+    
+            // Find the transaction in our stored transactions
+            const transaction = transactions.find(t => t.transactionId == transactionId);
+            if (!transaction) {
+                alert("Transaction details not found");
+                return;
+            }
+    
+            const date = new Date(transaction.transactionDate);
+            const formattedDate = date.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+    
+            // Format expiry date based on payment status
+            let expiryDateFormatted = '-';
+            if (transaction.paymentStatus === 'SUCCESS' && transaction.expiryDate) {
+                const expiryDate = new Date(transaction.expiryDate);
+                expiryDateFormatted = expiryDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+            }
+    
+            // Format plan details for receipt
+            let planDetails = 'N/A';
+            if (transaction.planDetails) {
+                const parts = transaction.planDetails.split(' | ');
+                if (parts.length >= 3) {
+                    planDetails = `${parts[0]} (${parts[1]} for ${parts[2]})`;
+                } else {
+                    planDetails = transaction.planDetails;
+                }
+            }
+    
+            const receiptContent = `
+                MOBICOMM Receipt
+                ----------------------------
+                Transaction ID: ${transaction.transactionId}
+                Date: ${formattedDate}
+                Mobile Number: ${mobileNo}
+                Plan Details: ${planDetails}
+                Amount: ₹${transaction.price?.toFixed(2) || '0.00'}
+                Status: ${transaction.paymentStatus || 'SUCCESS'}
+                Expiry Date: ${expiryDateFormatted}
+                
+                Thank you for choosing MOBICOMM!
+                ----------------------------
+                For any queries, contact support@MOBICOMM.com
+            `;
+            
+            const blob = new Blob([receiptContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `MobiComm_Receipt_${transaction.transactionId}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    
+        function showAlert(message, isError = false) {
+            const alert = document.getElementById('customAlert');
+            const alertMessage = document.getElementById('alertMessage');
+            
+            alertMessage.textContent = message;
+            alert.className = isError ? 'custom-alert error' : 'custom-alert';
+            alert.style.display = 'block';
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
